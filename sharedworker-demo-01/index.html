@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    //  与sharedWorker建立连接
+    var worker = new SharedWorker("sharedWorker.js");
+    var submit = function () {
+      // 给sharedWorker发送消息
+      worker.port.postMessage(JSON.stringify({
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value
+      }));
+
+      //worker.port.postMessage([1, 2]);
+    }
+
+    // 监听消息事件
+    worker.port.onmessage = function (e) {
+      document.getElementById("msg").append(JSON.stringify(e.data));
+      console.log(e);
+    }
+  </script>
+</head>
+
+<body>
+  <div>
+    <input type="text" id="name" />
+    <input type="text" id="age" />
+    <button type="button" onclick="submit()">提交</button>
+  </div>
+  <div id="msg">
+
+  </div>
+</body>
+
+</html>

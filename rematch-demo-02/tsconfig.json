@@ -1,0 +1,41 @@
+/*
+ * @Author: Gavin Chan 
+ * @Date: 2018-01-18 11:28:34 
+ * @Last Modified by: FunJia
+ * @Last Modified time: 2018-06-21 10:05:24
+ */
+{
+  "compilerOptions": {
+    "outDir": "build/dist",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["es6", "dom", "es2017"],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "baseUrl": "src",
+    "paths": {
+      "components/*": ["components/*"],
+      "containers/*": ["containers/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ]
+}

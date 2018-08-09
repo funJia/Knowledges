@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>main</title>
+</head>
+
+<body>
+  <div id="out"></div>
+  <input type="text" name="" id="txt">
+  <button id="btn">发送</button>
+  <script type="text/javascript">
+
+    var out = document.getElementById("out");
+    var btn = document.getElementById("btn");
+    var txt = document.getElementById("txt");
+    var worker1 = new Worker("worker.js");
+    btn.addEventListener("click", function () {
+      var postData = txt.value;
+      worker1.postMessage(postData);
+    }, false);
+    worker1.addEventListener('message', function (e) {
+      out.innerText = e.data;
+
+    }, false);
+  </script>
+</body>
+
+</html>
