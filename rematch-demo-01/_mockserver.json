@@ -1,0 +1,89 @@
+// _mockserver.json - mock 接口的配置文件, 相当于一份接口文档的描述文件
+// 可以在这个 JSON 中使用注释, 方便对接口做一些说明
+//
+// 在顶部注释中可以说明下项目接口协商要点
+// https://github.com/f2e-journey/treasure/blob/master/api.md#接口协商要点
+//
+// The minimal _mockserver.json, JSON 必须包含如下信息, 其他字段均是可选字段
+// {
+//     "api": {
+//         "GET /api/users": {
+//             "response": {}
+//         }
+//     }
+// }
+{
+  // Visual Stuido Code 支持通过 JSON schema 来验证 JSON 文件的格式并给予提示信息
+  // To understand the structure of JSON files, we use JSON schemas
+  // https://code.visualstudio.com/Docs/languages/json#_json-schemas-settings
+  "$schema":
+    "http://rawgit.com/ufologist/puer-mock/master/_mockserver-schema.json",
+
+  // 项目的介绍信息
+  "info": {
+    "summary": "xxx 项目接口文档",
+    "description": "如此高大上的接口文档 Powered by puer-mock"
+  },
+  "api": {
+    "POST /V1/user/feedback": {
+      "disabled": true,
+      "info": {
+        "summary": "配置一个 POST 接口, 以 JSON 作为输入参数",
+        "module": "接口配置示例-输入参数(request)",
+        "description": "",
+        "author": "Sun"
+      },
+      "request": {
+        "header": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "测试",
+          "content": "测试"
+        }
+      },
+      "response": {
+        "code": "0000",
+        "msg": "提交成功",
+        "data": {}
+      }
+    },
+    "GET /api/queryUser": {
+      "disabled": false,
+      "info": {
+        "summary": "应对不符合 REST 风格的接口",
+        "module": "接口配置示例-不符合 REST 风格的接口",
+        "description": "例如: /api.php?act=queryUser",
+        "author": "Sun"
+      },
+      "response": {
+        "code": "0000",
+        "msg": "提交成功",
+        "data": {}
+      }
+    },
+    "GET /api/user": {
+      "disabled": true,
+      "info": {
+        "summary": "获取员工列表",
+        "module": "接口配置示例-不符合 REST 风格的接口",
+        "description": "例如: /api.php?act=queryUser",
+        "author": "Sun"
+      },
+      "response": {
+        "code": "0000",
+        "msg": "提交成功",
+        "data": {
+          "list|5": [
+            {
+              "id": "@id",
+              "name": "@cname",
+              "departId": "@id"
+            }
+          ],
+          "totalCount": 25
+        }
+      }
+    }
+  }
+}
