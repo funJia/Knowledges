@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "ws": "^6.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "websocket_ws",
+  "version": "1.0.0",
+  "description": "ws版本的websocket",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}

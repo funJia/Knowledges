@@ -1,0 +1,65 @@
+{
+  "name": "lanmao_OMS",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/sharedworker": "^0.0.28",
+    "antd": "^3.6.4",
+    "babel-plugin-import": "^1.8.0",
+    "chalk": "^2.4.1",
+    "commitizen": "^2.10.1",
+    "conventional-changelog-cli": "^2.0.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^1.0.0-rc.13",
+    "immutability-helper": "^2.7.1",
+    "qiniu": "^7.2.1",
+    "rd": "^2.0.1",
+    "react": "^16.4.1",
+    "react-app-rewire-less": "2.1.1",
+    "react-app-rewired": "^1.5.2",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts-ts": "2.16.0",
+    "reselect": "^3.0.1",
+    "screenfull": "^3.3.2",
+    "signale": "^1.2.1",
+    "ssh2": "^0.6.1",
+    "ts-import-plugin": "^1.5.3",
+    "typescript": "^2.9.2",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start --scripts-version react-scripts-ts",
+    "build": "react-app-rewired build --scripts-version react-scripts-ts",
+    "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
+    "upload": "node ./upload.js",
+    "commitmsg": "validate-commit-msg",
+    "commit": "git-cz",
+    "eject": "react-scripts-ts eject",
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "pre-commit": "lint-staged"
+  },
+  "devDependencies": {
+    "@rematch/core": "^0.6.0",
+    "@rematch/select": "^0.3.0",
+    "@types/immutability-helper": "^2.6.3",
+    "@types/jest": "^23.1.1",
+    "@types/node": "^10.3.5",
+    "@types/react": "^16.4.1",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-redux": "^6.0.2",
+    "@types/react-router": "^4.0.27",
+    "@types/react-router-dom": "^4.2.7"
+  },
+  "lint-staged": {
+    "src/*.js": "tslint"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

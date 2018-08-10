@@ -1,0 +1,26 @@
+import * as React from "react";
+
+class NotFound extends React.Component {
+  state = {
+    animated: ""
+  };
+  enter = () => {
+    this.setState({ animated: "hinge" });
+  };
+  render() {
+    return (
+      <div
+        className="center"
+        style={{ height: "100%", background: "#ececec", overflow: "hidden" }}
+      >
+        <img
+          alt="404"
+          className={`animated swing ${this.state.animated}`}
+          onMouseEnter={this.enter}
+        />
+      </div>
+    );
+  }
+}
+
+export default NotFound;
