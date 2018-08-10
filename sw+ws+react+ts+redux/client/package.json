@@ -35,7 +35,7 @@
     "build": "react-app-rewired build --scripts-version react-scripts-ts",
     "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
     "upload": "node ./upload.js",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg_333333333": "validate-commit-msg",
     "commit": "git-cz",
     "eject": "react-scripts-ts eject",
     "analyze": "source-map-explorer build/static/js/main.*",
