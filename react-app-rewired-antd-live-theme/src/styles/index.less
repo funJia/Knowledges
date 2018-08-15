@@ -1,0 +1,36 @@
+// @import "variables";
+@import "./components/dashboard.less";
+.logo {
+  width: 120px;
+  height: 31px;
+  color: @heading-color;
+  float: right;
+}
+.secondary-color {
+  color: @secondary-color;
+}
+
+#root {
+  height: 100%;
+  .ant-layout {
+    height: 100%;
+  }
+}
+
+#root .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#root .trigger:hover {
+  color: #1890ff;
+}
+
+#root .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
