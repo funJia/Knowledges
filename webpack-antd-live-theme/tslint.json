@@ -1,0 +1,12 @@
+{
+  "extends": ["tslint-react"],
+  "rules": {
+    "ordered-imports": false,
+    "jsx-boolean-value": false,
+    "member-access": false,
+    "object-literal-sort-keys": false
+  },
+  "linterOptions": {
+    "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
+  }
+}
