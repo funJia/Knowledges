@@ -13,3 +13,7 @@ https://lzw.me/a/puppeteer-install-skip-download-chrome.html
 
 chrome 开发版
 https://free-vpn.github.io/chrome/
+
+2018/08/20 18:04:20
+
+研究了一下，excel 中顶部和最左侧边框的样式设置，发现无法设置...

@@ -7,11 +7,12 @@ htmlTo(
     table td {
       color: #666;
       height: 20px;
-      background-color: #f1f1f1;
-      border: 1px solid #eee;
+
+      border: 1px solid #000;
     }
     tr{      
       height:27pt;
+      border: 1px solid #000;
     }
     th{
       height:27pt;
@@ -20,11 +21,12 @@ htmlTo(
       font-size: 22.0pt;
       font-weight: 700;
       font-family: 黑体, monospace;
+      border: 1px solid #000;
     }
   </style>
   <table>
     <tr>
-      <th colspan="2">中心</th>      
+      <th colspan="10">中心</th>      
     </tr>
     <tr>
       <td>hello</td>
@@ -57,7 +59,7 @@ htmlTo(
 
     file
       .saveAs()
-      .pipe(fs.createWriteStream("test13.xlsx"))
+      .pipe(fs.createWriteStream("test17.xlsx"))
       .on("finish", () => console.log("Done."));
   }
 );
