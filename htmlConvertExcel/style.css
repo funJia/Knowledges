@@ -1,0 +1,29 @@
+td {
+  color: #666;
+  height: 20px;
+
+  border: 1px solid #000;
+}
+
+td.company {
+  color: windowtext;
+  font-size: 14pt;
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+  font-family: "宋体";
+}
+
+tr {
+  height: 27pt;
+  border: 1px solid #000;
+}
+th {
+  height: 27pt;
+  text-align: center;
+  color: windowtext;
+  font-size: 22pt;
+  font-weight: 700;
+  font-family: 黑体, monospace;
+  border: 1px solid #000;
+}
