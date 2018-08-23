@@ -127,7 +127,7 @@ function isValidColor(color) {
 
 const options = {
   stylesDir: path.join(__dirname, "./src/styles"),
-  // antDir: path.join(__dirname, "./node_modules/antd"),
+  antDir: path.join(__dirname, "./node_modules/antd"),
   varFile: path.join(__dirname, "./src/styles/variables.less"),
   mainLessFile: path.join(__dirname, "./src/styles/index.less"),
   themeVariables: [

@@ -21,16 +21,21 @@
         var notification = new Notification("Hi there!" + i, {
           icon: "http://ww4.sinaimg.cn/mw690/69eb024egw1eez7cujik0j20h20cvq4l.jpg",
           title: "Hi there!" + Date.now(),
-          data: 12312312,
           body: `<div color='red'>1232131</div>
           `
         });
 
         notification.onclick = (e) => {
-          e.currentTarget.close();
+          debugger;
+          // e.currentTarget.close();
+
           //window.parent.scrollTo(0, 1000)
           // 跳转到指定锚点
-          location.href = "#666"
+          //e.data.location.href = "#666"          
+          // 激活windows
+          window.focus();
+          window.open("http://localhost:999/index.html#666", "_self")
+          //location.href = "http://localhost:999/index.html#666"
         };
       }
 

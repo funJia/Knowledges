@@ -57,6 +57,7 @@ class App extends Component {
               onClick={this.toggle}
             />
           </Header>
+
           <Content style={contentStyle} />
         </Layout>
       </Layout>

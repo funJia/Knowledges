@@ -1,7 +1,7 @@
 module.exports = temp => {
   return `<table>
     <tr>
-      <td colspan="10" class="company">      
+      <td colspan="10" class="company">         
         ${temp.company}
       </td>
     </tr>

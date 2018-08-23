@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "better-xlsx": "^0.7.0",
     "html2xlsx": "^0.4.0"
   }
 }

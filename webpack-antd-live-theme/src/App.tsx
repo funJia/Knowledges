@@ -16,7 +16,7 @@ class App extends React.Component {
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
         <Rate character="6" />
-        <Button type="primary">123123</Button>
+        <Button>123123</Button>
       </div>
     );
   }

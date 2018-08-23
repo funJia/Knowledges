@@ -2,7 +2,7 @@
 
 1.分配订单
 
-![分配订单实现](/asset/分配订单.png)
+![分配订单实现](./asset/分配订单.png)
 
 [demo](https://codesandbox.io/s/m4mkqykrx)
 
@@ -18,6 +18,14 @@
 
 选择日期后显示的 tooltip 效果参考
 
-![日期tooltip](/asset/消息模块设置日期tooltip效果.png)
+![日期tooltip](./asset/消息模块设置日期tooltip效果.png)
 
 [demo](https://codesandbox.io/s/w7zyvx4p8l)
+
+4.多选 tag
+
+最优处理 or 标准处理
+
+![多选tag](./asset/多选显示tag.png)
+
+[demo](https://codesandbox.io/s/o5kx47y426)
