@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="form">
+      <el-select v-model="value4" clearable placeholder="请选择">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+      <el-button type="primary" @click="add(tableData,{name:'',brand:'',num:0,price:0,total:0})">添加</el-button>
+      <el-button type="primary" @click="clear">删除</el-button>
+      <el-button type="primary" @click="exportExcel">导出</el-button>
+    </div>
+    <el-tabs v-model="activeName">
+      <el-tab-pane label="用户管理" name="first">
+        <el-table :data="tableData" stripe show-summary :summary-method="getSummaries" @selection-change="handleSelectionChange"
+          style="width: 100%">
+          <el-table-column type="selection" width="100">
+          </el-table-column>
+          <el-table-column type="index" width="50">
+          </el-table-column>
+          <el-table-column prop="name" label="名称" width="180">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.name" placeholder="请输入内容"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="brand" label="品牌" width="180">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.brand" placeholder="请输入内容"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="num" label="数量">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.num" placeholder="请输入内容"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="address" label="单位">
+          </el-table-column>
+          <el-table-column prop="price" label="单价">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.price" placeholder="请输入内容"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="total" label="小计">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.total" placeholder="请输入内容"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="address" label="备注">
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
+    </el-tabs>
+
+  </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        activeName: 'first',
+        multipleSelection: [],
+        // 多选索引
+        multipleSelectionIndex: [],
+        options: [
+          { label: "打印、音响", value: "1" },
+        ],
+        tableData: []
+      }
+    },
+    methods: {
+      add(data, item) {
+        data.push(item);
+      },
+      clear() {
+        this.multipleSelection.forEach(item => {
+          var index = this.tableData.indexOf(item);
+          if (index) {
+            this.tableData.splice(index, 1);
+          }
+        });
+        this.multipleSelection = [];
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
+      // 合计
+      getSummaries(param) {
+        const { columns, data } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = '总价';
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            }, 0);
+            sums[index] += ' 元';
+          } else {
+            sums[index] = 'N/A';
+          }
+        });
+
+        return sums;
+      },
+      // 导出Excel
+      exportExcel() {
+        $.post("", this.tableData, (res) => {
+          location.href = res.url;
+        })
+      }
+    }
+  })
+</script>
+
+</html>
