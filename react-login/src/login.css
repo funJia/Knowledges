@@ -1,0 +1,16 @@
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+}
+
+/* .login-form-code {
+  margin: 0px 4px;
+} */
+
+.validate-code {
+  height: 32px;
+  margin: 0px 4px;
+}
