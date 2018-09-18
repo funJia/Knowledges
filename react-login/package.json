@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "antd": "^3.9.2",
+    "babel-polyfill": "^6.26.0",
+    "particles.js": "^2.0.0",
     "rc-tabs": "^9.4.3",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
