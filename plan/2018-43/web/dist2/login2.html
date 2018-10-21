@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>懒猫旅行 - 玩点特别的</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/default.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/login2.css" />
+  <script src="./js/main.js"></script>
+  <script src="//g.alicdn.com/dingding/dinglogin/0.0.5/ddLogin.js"></script>
+</head>
+
+<body onload="load()">
+  <main class="app-main">
+    <!-- <div class="homepage-bg"></div> -->
+    <div class="homepage">
+
+      <div class="homepage-content">
+        <div class="login-header">
+          <img class="logo-img" src="./images/logo.png" />
+          <!-- <div class="logo-slogen">玩点特别的！</div> -->
+        </div>
+        <!-- <div class="login-bg"></div> -->
+        <div class="login-content">
+          <div class="inner">
+            <div class="container">
+              <div class="login-container">
+                <!-- <div class="qrcode-content">
+                  <p>打开 钉钉 App</a></p>
+                  <p>在「消息」页面右上角打开扫一扫</p>
+                </div> -->
+                <div class="qrcode-img">
+                  <div id="login_container"></div>
+                  <!-- <img width="200px" height="200px" src="https://qr.api.cli.im/qr?data=%252F%252Fwww.baidu.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=9156cc07ddb5ff0332808ce0d33d69c1"
+                    alt="二维码"> -->
+                  <!-- <img class="small-logo" src="./images/small-logo.png"> -->
+                </div>
+                <div class="desc visibility-hidden"><img src="./images/tip.png" width="18px" />
+                  <span class="tip">验证码已发送至技术部测试人员和主客服</span></div>
+                <div class="cutButton">
+                  <button class="button" id="unableLogin" class="show" id="submit">无法登录？</button>
+                  <!-- <span id="unableLogin" class="link-button show">无法登录？</span> -->
+                  <div class="form">
+                    <div id="form-login" class="form-login hide">
+
+                      <div class="form-info">
+                        <div class="form-container">
+                          <div class="form-item" data-type="phone">
+                            <!-- <label for="">手机号码：</label> -->
+                            <div class="form-item-content">
+                              <input type="text" id="account" placeholder="请输入手机号码">
+                              <div class="error-tip hide">请输入手机号码</div>
+                            </div>
+                          </div>
+                          <div class="form-item validate-code" data-type="code">
+                            <!-- <label for="">验证码：</label> -->
+                            <div class="form-item-content">
+                              <input type="text" id="code" placeholder="请输入临时密码">
+                              <a href="javascript:void(0)" class="code-link" id="codeLink">点击获取</a>
+                              <span class="code-link count-down hide" id="countDown"></span>
+                              <div class="error-tip hide">请输入临时密码</div>
+                            </div>
+                          </div>
+                          <button class="button" id="submit">登录</button>
+                          <!-- <a href="javascript:void(0)" class="button" id="submit">确定</a> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script>
+  !function (window, document) {
+    function d(a) {
+      var e, c = document.createElement("iframe"),
+        d = "https://login.dingtalk.com/login/qrcode.htm?goto=" + a.goto;
+      d += a.style ? "&style=" + encodeURIComponent(a.style) : "",
+        d += a.href ? "&href=" + a.href : "",
+        c.src = d,
+        c.frameBorder = "0",
+        c.allowTransparency = "true",
+        c.scrolling = "no",
+        c.width = "260px",
+        c.height = "300px",
+        e = document.getElementById(a.id),
+        e.innerHTML = "",
+        e.appendChild(c)
+    }
+    window.DDLogin = d
+
+    var obj = DDLogin({
+      id: "login_container",//这里需要你在自己的页面定义一个HTML标签并设置id，例如<div id="login_container"></div>或<span id="login_container"></span>
+      goto: "", //请参考注释里的方式
+      style: "border:none;background-color:#fff",
+      width: "260px",
+      height: "300px"
+    });
+  }(window, document);
+
+</script>
+
+</html>
