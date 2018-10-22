@@ -1,0 +1,15 @@
+body {
+  padding: 20px;
+}
+
+.link-list {
+  margin-top: 20px;
+}
+
+.table-operate button {
+  margin-right: 6px;
+}
+
+.table-operate button:last-child {
+  margin-right: 0px;
+}
