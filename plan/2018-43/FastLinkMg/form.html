@@ -5,18 +5,20 @@
   <meta charset="UTF-8">
   <title>快捷链接管理 - 新增/修改</title>
   <link rel="stylesheet" href="./main.css">
+  <script src="./form.js"></script>
 </head>
 
 <body>
   <form action="">
-    <div>
-      <label for="title"></label>
+    <div class="form-item">
+      <label for="title">名称：</label>
       <input type="text" id="title" />
     </div>
-    <div>
-      <label for="addr"></label>
+    <div class="form-item">
+      <label for="addr">地址：</label>
       <input type="text" id="addr" />
     </div>
+    <div class="form-item form-operate"><button id="cancle">取消</button> <button class="primary" id="submit">确定</button></div>
   </form>
 </body>
 

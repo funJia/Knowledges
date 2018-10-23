@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <title>快捷链接管理</title>
   <link rel="stylesheet" href="./main.css">
-  <!-- <script src="./main.js"></script> -->
-  <script>
+  <script src="./main.js"></script>
+  <!-- <script>
     require("main.js")    
-  </script>
+  </script> -->
 </head>
 
 <body>
@@ -18,24 +18,12 @@
   </div>
   <table class="link-list">
     <thead>
-      <th></th>
+      <th><input type="checkbox" /></th>
       <th>标题</th>
       <th>地址</th>
       <th>操作</th>
     </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td>百度</td>
-        <td><a href="./index2.html">123213213</a></td>
-        <td class="table-operate"><button>Upd</button><button>Delete</button></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Google</td>
-        <td>http://www.google.com</td>
-        <td class="table-operate"><button>Upd</button><button>Delete</button></td>
-      </tr>
+    <tbody id="listContainer">
     </tbody>
   </table>
 </body>

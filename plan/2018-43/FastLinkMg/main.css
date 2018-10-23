@@ -13,3 +13,32 @@ body {
 .table-operate button:last-child {
   margin-right: 0px;
 }
+
+form {
+  width: 300px;
+  min-width: 200px;
+  min-height: 500px;
+  margin: 0 auto;
+}
+
+form .form-item {
+  margin-top: 10px;
+}
+
+form button {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  width: 80px;
+  height: 35px;
+}
+
+form .form-operate {
+  margin: 30px auto;
+  width: 200px;
+}
+
+form .primary {
+  color: #fff;
+  background-color: #1890ff;
+}
