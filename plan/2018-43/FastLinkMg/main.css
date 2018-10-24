@@ -16,8 +16,8 @@ body {
 
 form {
   width: 300px;
-  min-width: 200px;
-  min-height: 500px;
+  /* min-width: 200px;
+  min-height: 500px; */
   margin: 0 auto;
 }
 

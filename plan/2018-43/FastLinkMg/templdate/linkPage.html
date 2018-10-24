@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>~~</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <style>
+    .main {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      font-size: 30px;
+    }
+
+    ul {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="main">
+    {{each data as item i}}
+    <li><a href={{item.addr}} target="_blank">{{item.title}}</a></li>
+    {{/each}}
+  </ul>
+</body>
+
+</html>

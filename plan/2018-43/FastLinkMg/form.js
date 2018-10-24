@@ -52,6 +52,7 @@ function bindEvent(targets, method, callback) {
             break;
           case "submit":
             submit({ title: getValue("title"), addr: getValue("addr") });
+
             alert(JSON.stringify(window.opener.getList));
             window.close();
             break;
