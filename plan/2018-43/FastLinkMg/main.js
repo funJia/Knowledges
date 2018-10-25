@@ -1,6 +1,7 @@
 const db = require("./dal/db.js");
 const template = require("art-template");
 const fs = require("fs");
+const path = require("path");
 const Dialog = require("./widget/dialog.js");
 
 function getValue(id) {
@@ -68,12 +69,42 @@ function fileDownload(data, filename, mime) {
   }
 }
 
+// 绑定事件
+function bindEvent(targets, method, callback) {
+  if (targets instanceof Array) {
+    targets.forEach(function(item) {
+      item.target.addEventListener(method, function(e) {
+        callback(item.uuid, e);
+      });
+    });
+  } else {
+    targets.addEventListener(method, callback);
+  }
+}
+
+bindEvent = bindEvent.bind(this);
+
 function getList() {
   db.getList(function(docs) {
     const data = fs.readFileSync("./templdate/link.html", "utf-8");
-    const html = template.render(data, { data: docs });
+    const html = template.render(data, { data: docs, id: "linkDelete" });
     const listContainer = document.getElementById("listContainer");
     listContainer.innerHTML = html;
+
+    const targets = [];
+    document.querySelectorAll(".linkDelete").forEach(function(target) {
+      targets.push({ target: target });
+    });
+
+    bindEvent(targets, "click", function(uuid, e) {
+      const id = e.target.getAttribute("data-id");
+      db.removeById(id, function(err, numRemoved) {
+        // 删除成功， 刷新列表
+        if (numRemoved > 0) {
+          getList();
+        }
+      });
+    });
   });
 }
 

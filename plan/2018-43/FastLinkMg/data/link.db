@@ -1,5 +1,7 @@
-{"title":"供应链 预上线版本","addr":"http://admin.cattrip.net/user/login_test2018","_id":"5D56FksoPf26U9zg"}
-{"title":"供应链 正式版本","addr":"http://admin.cattour.cn/consumer/index","_id":"Oa8L7h8eus2TcFC3"}
+{"title":"Jenkins 正式环境","addr":"http://jenkins.lanmaowork.com/job/front.cattour.cn/","_id":"4qsdIwX7ZdcbrBVS"}
+{"title":"预上线子订单列表","addr":"http://front.cattrip.net/app/orderList/","_id":"OHLNvCn51zc6ygLt"}
+{"title":"jenkins 预上线发布地址","addr":"http://jenkins.lanmaowork.com/job/front.cattrip.net/","_id":"UcpyxGzDV1rHNCP1"}
 {"title":"伙伴云 bug系统","addr":"https://app.huoban.com/tables/4229383","_id":"cFnSaDt1K8ayC7Eg"}
+{"title":"正式地址：子订单列表","addr":"http://front.cattour.cn/app/orderList","_id":"sYTwO6evPHHKViX3"}
 {"title":"jenkins 自动化打包工具","addr":"http://jenkins.lanmaowork.com/","_id":"spcLFDVBu4tZ7w94"}
 {"title":"新版子订单页面 接口文档","addr":"http://mock.lanmaowork.com/group/14","_id":"st638q7MNbVSuifU"}

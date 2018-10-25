@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
+    "build": "electron-packager . linkmg --platform=win32",
+    "package": "electron-packager . --platform=win32 --overwrite --ignore=node_modules --ignore=.gitignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.5"
+    "electron": "^3.0.5",
+    "electron-packager": "^12.2.0"
   },
   "dependencies": {
     "art-template": "^4.13.1",

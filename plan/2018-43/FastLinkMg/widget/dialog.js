@@ -1,6 +1,7 @@
 const template = require("art-template");
 const fs = require("fs");
 const cuid = require("cuid");
+const path = require("path");
 
 function Dialog() {
   this.title = "提示";

@@ -1,4 +1,4 @@
-const db = require("./dal/db");
+const db = require("file://" + __dirname + "/dal/db");
 
 // 取消
 function cancle() {

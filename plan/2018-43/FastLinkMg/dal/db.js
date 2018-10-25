@@ -16,13 +16,23 @@ const add = function(model) {
 };
 
 const getList = function(callback) {
-  db.find({}, function(err, docs) {
-    callback(docs);
+  db.find({})
+    .sort({ _id: -1 })
+    .exec(function(err, docs) {
+      callback(docs);
+    });
+};
+
+// 根据id删除一条记录
+const removeById = function(id, callback) {
+  db.remove({ _id: id }, {}, function(err, numRemoved) {
+    callback(err, numRemoved);
   });
 };
 
 // 导出方法
 module.exports = {
   add: add,
-  getList: getList
+  getList: getList,
+  removeById: removeById
 };
