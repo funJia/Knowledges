@@ -1,0 +1,69 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  editorpadding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.render {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.render .DraftEditor-root {
+  border: 1px solid red;
+  width: 120px;
+  text-align: start;
+  border: 1px solid red;
+  width: 220px;
+  text-align: start;
+  height: 160px;
+  overflow: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .DraftEditor-root {
+  border: 1px solid red;
+  text-align: start;
+  border: 1px solid red;
+  width: 145px;
+  text-align: start;
+  height: 160px;
+  overflow: auto;
+}
+
+.container .DraftEditor-editorContainer {
+  /* width: 200px; */
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
