@@ -1,0 +1,6 @@
+/* // 异常消息 */
+.abnormal-notice .order-detail .item__data {
+  /* // 异常模板中每项的宽度 */
+  min-width: 140px;
+  display: inline-block;
+}

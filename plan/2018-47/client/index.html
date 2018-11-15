@@ -1,0 +1,25 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script src="js/gio.js"></script>
+<script src="js/app.js"></script>
+<script>
+  var permission = Notification.permission;
+  // 先检查浏览器是否支持
+  // if (!("Notification" in window)) {
+  //   alert("This browser does not support desktop notification");
+  // }
+
+  // 检查用户是否同意接受通知
+  if (permission == "granted") {
+    permission = "granted";
+    // If it's okay let's create a notification
+    //new Notification("Hi there!");
+    // permission = "granted";
+  }
+
+  // 否则我们需要向用户获取权限
+  else if (permission !== "denied") {
+    Notification.requestPermission(function(_permission) {
+      permission = _permission;
+    });
+  }
+</script>
