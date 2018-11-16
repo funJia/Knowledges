@@ -4,6 +4,9 @@ import Immutable from "immutable";
 import "./App.css";
 import "./styles/iconfont/iconfont.css";
 
+import * as qiniu from "qiniu-js";
+const uuidv1 = require("uuid/v1");
+
 import {
   Editor,
   EditorState,
@@ -69,6 +72,7 @@ const Media = props => {
   try {
     const entity = props.contentState.getEntity(props.block.getEntityAt(0));
     const { src, title } = entity.getData();
+    debugger;
     const type = entity.getType();
 
     let media = transformMedia(type, title, src);
@@ -121,7 +125,7 @@ const transformMedia = (type, title, src) => {
       <div>
         <a href={src} target="_blank">
           <i className="action-user action-tiaozhuan" />
-          {src}
+          {src.trim()}
         </a>
       </div>
     );
@@ -159,9 +163,6 @@ const styles = {
   },
   media: {
     width: 80,
-    // width: "100%",
-    // Fix an issue with Firefox rendering video controls
-    // with 'pre-wrap' white-space
     whiteSpace: "initial" as WhiteSpaceProperty
   }
 };
@@ -174,14 +175,6 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    // const sampleMarkup = "<a herf='####'>666</a>";
-
-    // const blocksFromHTML = convertFromHTML(sampleMarkup);
-    // const state = ContentState.createFromBlockArray(
-    //   blocksFromHTML.contentBlocks,
-    //   blocksFromHTML.entityMap
-    // );
-
     this.state = {
       editorState: EditorState.createEmpty(), //EditorState.createWithContent(state),
       editorState2: EditorState.createEmpty()
@@ -238,10 +231,7 @@ class App extends React.Component {
       "IMMUTABLE",
       {
         src: src,
-        title: title,
-        data: {
-          key: 666
-        }
+        title: title
       }
     );
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
@@ -363,6 +353,48 @@ class App extends React.Component {
     return () => this.upLoad(title, type);
   };
 
+  // 文件选择
+  onFileChange = event => {
+    const input = event.target;
+    // console.log(input)
+    const files = input.files;
+    if (files && files.length > 0) {
+      const file = files[0],
+        key = uuidv1(),
+        token =
+          "bXYqJXBrhXTr6tzGC78MlguHXuz6CoX7nhqI5_zd:YuzxRyaol3O_SHN6P3bf_yhuz6I=:eyJzY29wZSI6Imxhbm1hbyIsImRlYWRsaW5lIjoxNTQyMzUyNjI4fQ==";
+      const config = {
+        useCdnDomain: true,
+        region: qiniu.region.z0
+      };
+
+      const putExtra = {
+        fname: file.name,
+        params: {}
+        // mimeType: qn.allowe.split(',')
+      };
+
+      const observable = qiniu.upload(file, key, token, putExtra, config);
+      observable.subscribe(
+        (next: any) => {
+          console.log("next");
+        },
+        (error: any) => {
+          console.log("error");
+        },
+        (res: any) => {
+          console.log("上传完成后", res);
+          //const url = qn.domain + "/" + res.key;
+          // this.setState({
+          //   lineProgressShow: false,
+          //   url
+          // });
+          // this.props.onValue(url);
+        }
+      );
+    }
+  };
+
   public render() {
     return (
       <div className="App">
@@ -394,6 +426,19 @@ class App extends React.Component {
             上传word
           </button>
           <button onClick={this.upLoadFile("客户资料", "txt")}>上传txt</button>
+          使用qiniu sdk 上传文件
+          <a href="javascript:void(0)">
+            <label html-for="file">
+              上传
+              <input
+                type="file"
+                id="file"
+                name="SocSecNum"
+                style={{ display: "none" }}
+                onChange={this.onFileChange}
+              />
+            </label>
+          </a>
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
