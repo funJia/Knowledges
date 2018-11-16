@@ -44,6 +44,16 @@ export const gio = (uri, onConnect, onDisConnect) => {
       worker.port.addEventListener(
         "message",
         function(event) {
+          console.log("sharedworker PostMessage", event.data.type);
+          onMessage(event.data.type, event.data.message);
+        },
+        false
+      );
+
+      worker.port.addEventListener(
+        "syncCloseNotice",
+        function(event) {
+          console.log("sharedworker PostMessage", event);
           onMessage(event.data.type, event.data.message);
         },
         false
@@ -98,7 +108,17 @@ export const gio = (uri, onConnect, onDisConnect) => {
     registerEvent: function(eventName, callback) {
       events[eventName] = callback;
     },
-
+    // 发送消息
+    postMessage: function(msg, type = "syncCloseNotice") {
+      if (worker && portId) {
+        worker.port.postMessage({
+          type: type,
+          // events: getKeys(events),
+          id: portId,
+          content: msg
+        });
+      }
+    },
     start: function() {
       // if (!SharedWorker) {
       //     startSocketIo();

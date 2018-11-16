@@ -51,6 +51,17 @@ class App extends React.Component {
       }
     });
 
+    // 注册同步关闭通知事件
+    ws.registerEvent("syncCloseNotice", data => {
+      console.log("syncCloseNotice", data);
+    });
+
+    // 发送同步关闭通知消息
+    // 需要同时打开两个tab页才能验证正确
+    setTimeout(() => {
+      ws.postMessage(11111, "syncCloseNotice");
+    }, 2000);
+
     ws.onError(function(data) {
       console.log("error", data);
     });

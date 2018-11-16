@@ -23,37 +23,68 @@ addEventListener("connect", function(event) {
   port.start();
 
   port.addEventListener("message", function(event) {
-    event.target.id = event.data.id;
-    for (var i = 0; i < event.data.events.length; ++i) {
-      var eventName = event.data.events[i];
-      ws.onmessage = function(e) {
-        // 生成SharedWork消息唯一识别码
-        var notice = JSON.parse(e.data);
-        notice.swId = guid();
-        var data = JSON.stringify(notice);
+    var id = event.data.id,
+      type = event.data.type;
 
-        for (var i = 0; i < ports.length; i++) {
-          console.log(ports[i]);
-          ports[i].postMessage({
-            type: eventName,
-            message: data
-          });
-        }
-      };
+    switch (type) {
+      case "register":
+        event.target.id = event.data.id;
+        break;
+      case "message":
+        ws.onmessage = function(e) {
+          // 生成SharedWork消息唯一识别码
+          var notice = JSON.parse(e.data);
+          notice.swId = guid();
+          var data = JSON.stringify(notice);
+
+          for (var i = 0; i < ports.length; i++) {
+            console.log(ports[i]);
+            ports[i].postMessage({
+              type: type,
+              message: data
+            });
+          }
+        };
+        break;
+      case "syncCloseNotice":
+        var noticeId = event.data.content;
+        syncCloseNotice(id, noticeId);
+        break;
+      default:
+        break;
     }
+
+    // for (var i = 0; i < event.data.events.length; ++i) {
+    //   var eventName = event.data.events[i];
+    //   if (eventName)
+    //     ws.onmessage = function(e) {
+    //       // 生成SharedWork消息唯一识别码
+    //       var notice = JSON.parse(e.data);
+    //       notice.swId = guid();
+    //       var data = JSON.stringify(notice);
+
+    //       for (var i = 0; i < ports.length; i++) {
+    //         console.log(ports[i]);
+    //         ports[i].postMessage({
+    //           type: eventName,
+    //           message: data
+    //         });
+    //       }
+    //     };
+    // }
   });
 });
 
 // 同步被关闭通知
-var syncCloseNotice = function(data) {
+var syncCloseNotice = function(portId, noticeId) {
   var port = null;
   for (var i = 0; i < ports.length; i++) {
     port = ports[i];
-    if (data.id != port.id) {
-      ports[i].postMessage({
-        type: "eventName",
+    if (portId != port.id) {
+      port.postMessage({
+        type: "syncCloseNotice",
         message: JSON.stringify({
-          ids: data.noticeId
+          ids: noticeId
         })
       });
     }
