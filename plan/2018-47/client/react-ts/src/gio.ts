@@ -12,19 +12,8 @@ export const gio = (uri, onConnect, onDisConnect) => {
     });
   }
 
+  // port 唯一标识
   const portId = guid();
-
-  // function getKeys(obj: any) {
-  //   const keys: any = [];
-
-  //   for (const i in obj) {
-  //     if (obj.hasOwnProperty(i)) {
-  //       keys.push(i);
-  //     }
-  //   }
-
-  //   return keys;
-  // }
 
   function onMessage(type, message) {
     switch (type) {
@@ -80,29 +69,6 @@ export const gio = (uri, onConnect, onDisConnect) => {
       message.warn("您当前浏览器不支持消息推送功能");
     }
   }
-
-  // function startSocketIo() {
-  //     const socket = io(uri);
-  //     socket.on('connect', function () {
-  //         if (onConnect) onConnect();
-  //     });
-
-  //     socket.on('disconnect', function () {
-  //         if (onDisConnect) onDisConnect();
-  //     });
-
-  //     for (const eventName in events) {
-  //         if (events.hasOwnProperty(eventName)) {
-  //             socket.on(eventName, socketOnEventHandler(eventName));
-  //         }
-  //     }
-  // }
-
-  // function socketOnEventHandler(eventName) {
-  //     return function (e) {
-  //         onMessage(eventName, e);
-  //     };
-  // }
 
   return {
     registerEvent: function(eventName, callback) {

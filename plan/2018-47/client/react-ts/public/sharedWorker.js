@@ -34,6 +34,7 @@ addEventListener("connect", function(event) {
         ws.onmessage = function(e) {
           // 生成SharedWork消息唯一识别码
           var notice = JSON.parse(e.data);
+          notice = notice.data;
           notice.swId = guid();
           var data = JSON.stringify(notice);
 

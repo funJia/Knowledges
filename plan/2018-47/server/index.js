@@ -129,22 +129,23 @@ wss.on("connection", function connection(ws) {
   );
 
   // 发送消息到客户端
-  ws.send(JSON.stringify(data));
-  ws.send(JSON.stringify(data2));
-  ws.send(JSON.stringify(data3));
-  ws.send(JSON.stringify(data4));
-  ws.send(JSON.stringify(data5));
+  ws.send(JSON.stringify({ data: data }));
+  ws.send(JSON.stringify({ data: data2 }));
+  ws.send(JSON.stringify({ data: data3 }));
+  ws.send(JSON.stringify({ data: data4 }));
+  ws.send(JSON.stringify({ data: data5 }));
+
   const array = [data, data2, data3, data4];
 
   setInterval(() => {
     // const index = Math.round(Math.random() * 3);
     // ws.send(JSON.stringify(array[index]));
     try {
-      ws.send(JSON.stringify(data));
-      ws.send(JSON.stringify(data2));
-      ws.send(JSON.stringify(data3));
-      ws.send(JSON.stringify(data4));
-      ws.send(JSON.stringify(data5));
+      ws.send(JSON.stringify({ data: data }));
+      ws.send(JSON.stringify({ data: data2 }));
+      ws.send(JSON.stringify({ data: data3 }));
+      ws.send(JSON.stringify({ data: data4 }));
+      ws.send(JSON.stringify({ data: data5 }));
     } catch (error) {}
   }, 30000);
 });

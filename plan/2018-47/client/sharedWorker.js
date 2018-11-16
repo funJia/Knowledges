@@ -22,6 +22,7 @@ addEventListener("connect", function(event) {
         // 浏览器消息通知
         // 一个进程只允许提醒一次
         var noticeData = JSON.parse(e.data);
+        noticeData = noticeData.data;
         // 普通消息（总要级别的），异常消息，满员订单状态更改消息时使用浏览器通知
         if (
           noticeData.type == 1 ||
