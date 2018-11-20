@@ -7,6 +7,8 @@ import "./styles/iconfont/iconfont.css";
 import * as qiniu from "qiniu-js";
 const uuidv1 = require("uuid/v1");
 
+import axios from "axios";
+
 import {
   Editor,
   EditorState,
@@ -72,7 +74,7 @@ const Media = props => {
   try {
     const entity = props.contentState.getEntity(props.block.getEntityAt(0));
     const { src, title } = entity.getData();
-    debugger;
+
     const type = entity.getType();
 
     let media = transformMedia(type, title, src);
@@ -203,7 +205,6 @@ class App extends React.Component {
   }
   // 过滤外部链接
   filterUrl = data => {
-    debugger;
     if (data.type === "unstyled") return this.checkUrl(data.text);
     else return false;
   };
@@ -334,13 +335,14 @@ class App extends React.Component {
   };
 
   // 上传
-  upLoad = (title = "", type = "image") => {
+  upLoad = (title = "", url, type = "image") => {
+    debugger;
     let editorState: any = this.state.editorState;
     editorState = this.addEntity(
       editorState,
       type,
       title,
-      "http://t2.hddhhn.com/uploads/tu/201610/198/53qyx0kkory.jpg"
+      url || "http://t2.hddhhn.com/uploads/tu/201610/198/53qyx0kkory.jpg"
     );
     this.setState({
       editorState: editorState
@@ -349,8 +351,102 @@ class App extends React.Component {
   };
 
   // 上传文件
-  upLoadFile = (title = "", type) => {
-    return () => this.upLoad(title, type);
+  upLoadFile = (title = "", url, type) => {
+    return () => this.upLoad(title, url, type);
+  };
+
+  // 获取文件信息
+  getFileInfo = file => {
+    let name: any, type: any;
+    const lastIndex = file.name.lastIndexOf("."),
+      fileType = file.type;
+
+    name = file.name.substr(0, lastIndex);
+
+    switch (fileType) {
+      case "application/msword":
+      case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        type = "word";
+        break;
+      case "application/vnd.ms-excel":
+      case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        type = "excel";
+        break;
+      case "text/plain":
+        type = "txt";
+        break;
+      default:
+        // 默认为txt类型
+        if (fileType.indexOf("image/") != -1) type = "image";
+        else type = "txt";
+        break;
+    }
+    return { name, type };
+  };
+
+  uploadQNFile = (file, token, domain, target) => {
+    const key = uuidv1();
+    const config = {
+      useCdnDomain: true,
+      region: qiniu.region.z0
+    };
+
+    const putExtra = {
+      fname: file.name,
+      params: {}
+      // mimeType: qn.allowe.split(',')
+    };
+
+    // const addContent = (name, url, type) => {
+    //   this.upLoadFile(name, url, type);
+    // };
+
+    const observable = qiniu.upload(file, key, token, putExtra, config);
+    observable.subscribe(
+      (next: any) => {
+        console.log("next");
+      },
+      (error: any) => {
+        console.log("error");
+        console.log(error);
+      },
+      (res: any) => {
+        console.log("上传完成后", res);
+        const url = domain + "/" + res.key;
+        //window.open(url);
+        const { name, type } = this.getFileInfo(file);
+        // addContent(name, url, type);
+        this.upLoad(name, url, type);
+        target.value = "";
+        // this.setState({
+        //   lineProgressShow: false,
+        //   url
+        // });
+        // this.props.onValue(url);
+      }
+    );
+  };
+
+  getQNConfig = (next, file, target) => {
+    axios
+      .get("xxxxxxxx")
+      .then(function(res: any) {
+        console.log(res);
+        const _data = res.data;
+        if (_data.code == "0000")
+          next(file, _data.data.token, _data.data.url, target);
+        else {
+          next(
+            file,
+            "bXYqJXBrhXTr6tzGC78MlguHXuz6CoX7nhqI5_zd:0q6YluktUun5oolAm5_NyPihrmw=:eyJzY29wZSI6Imxhbm1hbyIsImRlYWRsaW5lIjoxNTQyNzA2NTQ5fQ==",
+            "https://static.lanmao.cn",
+            target
+          );
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   // 文件选择
@@ -359,39 +455,16 @@ class App extends React.Component {
     // console.log(input)
     const files = input.files;
     if (files && files.length > 0) {
-      const file = files[0],
-        key = uuidv1(),
-        token =
-          "bXYqJXBrhXTr6tzGC78MlguHXuz6CoX7nhqI5_zd:YuzxRyaol3O_SHN6P3bf_yhuz6I=:eyJzY29wZSI6Imxhbm1hbyIsImRlYWRsaW5lIjoxNTQyMzUyNjI4fQ==";
-      const config = {
-        useCdnDomain: true,
-        region: qiniu.region.z0
-      };
-
-      const putExtra = {
-        fname: file.name,
-        params: {}
-        // mimeType: qn.allowe.split(',')
-      };
-
-      const observable = qiniu.upload(file, key, token, putExtra, config);
-      observable.subscribe(
-        (next: any) => {
-          console.log("next");
-        },
-        (error: any) => {
-          console.log("error");
-        },
-        (res: any) => {
-          console.log("上传完成后", res);
-          //const url = qn.domain + "/" + res.key;
-          // this.setState({
-          //   lineProgressShow: false,
-          //   url
-          // });
-          // this.props.onValue(url);
-        }
-      );
+      const file = files[0];
+      console.log(file);
+      const fileSize = file.size;
+      var size = fileSize / 1024;
+      if (size > 1024) {
+        alert("附件不能大于1M");
+        input.value = "";
+        return;
+      }
+      this.getQNConfig(this.uploadQNFile, file, input);
     }
   };
 
@@ -418,14 +491,16 @@ class App extends React.Component {
               blockRenderMap={extendedBlockRenderMap}
             />
           </div>
-          <button onClick={this.upLoadFile("", "image")}>上传图片</button>
-          <button onClick={this.upLoadFile("订单列表", "excel")}>
+          <button onClick={this.upLoadFile("", "", "image")}>上传图片</button>
+          <button onClick={this.upLoadFile("订单列表", "", "excel")}>
             上传Excel
           </button>
-          <button onClick={this.upLoadFile("需求文档", "word")}>
+          <button onClick={this.upLoadFile("需求文档", "", "word")}>
             上传word
           </button>
-          <button onClick={this.upLoadFile("客户资料", "txt")}>上传txt</button>
+          <button onClick={this.upLoadFile("客户资料", "", "txt")}>
+            上传txt
+          </button>
           使用qiniu sdk 上传文件
           <a href="javascript:void(0)">
             <label html-for="file">
@@ -435,6 +510,11 @@ class App extends React.Component {
                 id="file"
                 name="SocSecNum"
                 style={{ display: "none" }}
+                accept="image/*, image/*,application/msword,
+                application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                application/vnd.ms-excel,	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                text/plain
+                "
                 onChange={this.onFileChange}
               />
             </label>
