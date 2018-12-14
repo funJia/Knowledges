@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "nodejieba": "^2.3.0",
+    "pinyin": "^2.8.3"
+  }
+}
