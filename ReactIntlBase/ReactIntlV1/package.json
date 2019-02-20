@@ -1,0 +1,47 @@
+{
+  "name": "antd-demo-ts",
+  "version": "0.1.0",
+  "entry": {
+    "en-US": "./src/entry/en-US.js",
+    "zh-Hans-CN": "./src/entry/zh-Hans-CN.js",
+    "index": "./src/index.tsx"
+  },
+  "private": true,
+  "dependencies": {
+    "@types/jest": "24.0.6",
+    "@types/node": "11.9.4",
+    "@types/react": "16.8.3",
+    "@types/react-dom": "16.8.2",
+    "@types/react-intl": "^2.3.17",
+    "antd": "^3.13.4",
+    "babel-plugin-import": "^1.11.0",
+    "customize-cra": "^0.2.11",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-intl": "^2.8.0",
+    "react-scripts": "2.1.5",
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "build2": "atool-build -o ./dist/${npm_package_name}/${npm_package_version}/",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "trans": "atool-l10n"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "atool-build": "^1.0.7",
+    "atool-l10n": "^0.3.1",
+    "react-app-rewired": "^2.1.0"
+  }
+}
