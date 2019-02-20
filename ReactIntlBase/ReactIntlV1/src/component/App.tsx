@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import { injectIntl, FormattedMessage, defineMessages } from 'react-intl';
+import {  FormattedMessage, defineMessages } from 'react-intl';
+import {Button,DatePicker} from "antd";
 
 const messages = defineMessages({
   label: {
     id: 'InjectExample.button',
     defaultMessage: '弹窗',
+  },
+  "commit": {
+    id: 'InjectExample.commit',
+    defaultMessage: '提交',
   },
 });
 
@@ -18,12 +23,12 @@ class App extends Component<any,any> {
         </div>
         <div>
           <label><FormattedMessage {...messages.label} /></label>
+          <Button><FormattedMessage {...messages.commit} /></Button>
+          <DatePicker/>
         </div>
       </div>
     );
   }
 }
 
-export default injectIntl(App, {
-  withRef: true,
-});
+export default App;

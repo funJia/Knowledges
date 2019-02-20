@@ -2,5 +2,6 @@
   "App.datePicker.title": "Date selection",
   "InjectExample.alert": "I am reminded",
   "InjectExample.button": "Popup window",
-  "InjectExample.description": "I was to describe"
+  "InjectExample.description": "I was to describe",
+  "InjectExample.commit":"commit"
 }
