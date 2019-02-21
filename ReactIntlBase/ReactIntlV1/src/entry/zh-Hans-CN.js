@@ -9,6 +9,7 @@ window.appLocale = {
   },
   antd: antdZh,
   locale: 'zh-Hans-CN',
+  momentLocale:'zh-cn',
   data: appLocaleData,
 };
 

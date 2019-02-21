@@ -7,6 +7,12 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 
 const appLocale = (window as any).appLocale;
 
+import moment from 'moment';
+// 需要运行时获取语言包
+require("moment/locale/"+appLocale.momentLocale)
+moment.locale(appLocale.momentLocale);
+
+
 addLocaleData(appLocale.data);
 
 ReactDOM.render(

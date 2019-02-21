@@ -8,5 +8,6 @@ window.appLocale = {
   },
   antd: antdEn,
   locale: 'en-US',
+  momentLocale:'en-gb',
   data: appLocaleData,
 };

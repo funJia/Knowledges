@@ -99,7 +99,7 @@ module.exports = function (webpackEnv) {
               stage: 3,
             }),
           ],
-          sourceMap: isEnvProduction ?false:true,
+          sourceMap: isEnvProduction ? false : true,
           //sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       },
@@ -108,7 +108,7 @@ module.exports = function (webpackEnv) {
       loaders.push({
         loader: require.resolve(preProcessor),
         options: {
-          sourceMap: isEnvProduction ?false:true,
+          sourceMap: isEnvProduction ? false : true,
           //sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       });
@@ -124,12 +124,12 @@ module.exports = function (webpackEnv) {
           require.resolve('react-dev-utils/webpackHotDevClient'),
           paths.appSrc + '/entry/zh-Hans-CN.js',
           paths.appIndexJs,
-        ],        
+        ],
         "react": "react",
       };
     } else {
       return {
-        "index": paths.appIndexJs,        
+        "index": paths.appIndexJs,
         "zh": paths.appSrc + '/entry/zh-Hans-CN.js',
         "en": paths.appSrc + '/entry/en-US.js',
         "react": "react"
@@ -141,7 +141,7 @@ module.exports = function (webpackEnv) {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvProduction ?false:true,    
+    devtool: false, // isEnvProduction ? false : true,
     // isEnvProduction ?
     //   shouldUseSourceMap ?
     //   'source-map' :
@@ -337,7 +337,6 @@ module.exports = function (webpackEnv) {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
                 ),
-
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -358,6 +357,32 @@ module.exports = function (webpackEnv) {
                 compact: isEnvProduction,
               },
             },
+            {
+              test: /\.less$/,
+              use: [
+                require.resolve('style-loader'),
+                {
+                  loader: require.resolve('css-loader')
+                },
+                {
+                  loader: require.resolve('less-loader')
+                }
+              ],
+            },
+            // {
+            //   test: /\.(tsx)$/,
+            //   include: paths.appSrc,
+            //   loader: 'babel',
+            //   query: {
+            //     cacheDirectory: true,
+            //     plugins: [
+            //       ["import", {
+            //         libraryName: "antd",
+            //         style: true
+            //       }]
+            //     ]
+            //   }
+            // },
             // Process any JS outside of the app with Babel.
             // Unlike the application JS, we only compile the standard ES features.
             {
@@ -398,7 +423,7 @@ module.exports = function (webpackEnv) {
               exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
-                sourceMap: isEnvProduction ?false:true
+                sourceMap: isEnvProduction ? false : true
                 // isEnvProduction ?
                 //   shouldUseSourceMap : isEnvDevelopment,
               }),
@@ -414,7 +439,7 @@ module.exports = function (webpackEnv) {
               test: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
-                sourceMap: isEnvProduction ?false:true,
+                sourceMap: isEnvProduction ? false : true,
                 // sourceMap: isEnvProduction ?
                 //   shouldUseSourceMap : isEnvDevelopment,
                 modules: true,
@@ -429,7 +454,7 @@ module.exports = function (webpackEnv) {
               exclude: sassModuleRegex,
               use: getStyleLoaders({
                   importLoaders: 2,
-                  sourceMap: isEnvProduction ?false:true,
+                  sourceMap: isEnvProduction ? false : true,
                   // sourceMap: isEnvProduction ?
                   //   shouldUseSourceMap : isEnvDevelopment,
                 },
@@ -447,7 +472,7 @@ module.exports = function (webpackEnv) {
               test: sassModuleRegex,
               use: getStyleLoaders({
                   importLoaders: 2,
-                  sourceMap: isEnvProduction ?false:true,
+                  sourceMap: isEnvProduction ? false : true,
                   // sourceMap: isEnvProduction ?
                   //   shouldUseSourceMap : isEnvDevelopment,
                   modules: true,
@@ -480,10 +505,11 @@ module.exports = function (webpackEnv) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
+      // 中文
       new HtmlWebpackPlugin(
         Object.assign({}, {
             inject: true,
-            chunks: isEnvDevelopment?["react","index"]:["react","zh","index"],
+            chunks: isEnvDevelopment ? ["react", "index"] : ["react", "zh", "index"],
             chunksSortMode: "manual",
             template: paths.appHtml,
           },
@@ -504,10 +530,11 @@ module.exports = function (webpackEnv) {
           undefined
         )
       ),
+      // 英文
       new HtmlWebpackPlugin(
         Object.assign({}, {
             inject: true,
-            chunks:  isEnvDevelopment?["react","index"]:["react","en","index"],
+            chunks: isEnvDevelopment ? ["react", "index"] : ["react", "en", "index"],
             chunksSortMode: "manual", // manual根据chunks的位置手动排序
             template: paths.appHtml,
             filename: 'en.html'
@@ -528,6 +555,12 @@ module.exports = function (webpackEnv) {
           } :
           undefined
         )
+      ),
+      // 指定加载moment的语言包 
+      // 上下文替换插件(ContextReplacementPlugin) 允许你覆盖查找规则，
+      new webpack.ContextReplacementPlugin(
+        /moment[/\\]locale$/,
+        /zh-cn|en-gb///中文|英文
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
@@ -644,3 +677,14 @@ module.exports = function (webpackEnv) {
     performance: false,
   };
 };
+
+// const { injectBabelPlugin } = require('react-app-rewired');
+
+// module.exports = function override(config, env) {
+//     // do stuff with the webpack config...
+//     config = injectBabelPlugin(
+//         ['import', { libraryName: 'antd', libraryDirectory: 'es', style: 'css' }, "ant"],
+//         config,
+//     );
+//     return config;
+//   };
