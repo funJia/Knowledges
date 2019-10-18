@@ -1,0 +1,4 @@
+AutoStart:
+ - nginx.exe
+ - index2.exe
+ - powerShell.exe
