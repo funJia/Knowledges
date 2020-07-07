@@ -31,7 +31,7 @@
     "line-height": "^0.3.1",
     "material-ui": "^0.20.0",
     "md5-typescript": "^1.0.5",
-    "npm": "^5.7.1",
+    "npm": "^6.14.6",
     "npm-run-all": "^4.1.2",
     "object-assign": "4.1.1",
     "postcss-aspect-ratio-mini": "^0.0.2",
