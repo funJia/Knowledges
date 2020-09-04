@@ -133,7 +133,7 @@
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-form": "^7.0.13",
     "@types/redux-thunk": "^2.1.0",
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.13.1"
   },
   "main": "index.js",
   "license": "MIT",
