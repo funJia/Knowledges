@@ -16,7 +16,7 @@
         "ws": "^6.0.0"
     },
     "devDependencies": {
-        "grunt": "^0.4.5",
+        "grunt": "^1.5.3",
         "grunt-contrib-jshint": "^0.10.0",
         "load-grunt-tasks": "^1.0.0"
     }
