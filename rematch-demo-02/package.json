@@ -89,7 +89,7 @@
     "uuid": "^3.2.1",
     "validate-commit-msg": "^2.14.0",
     "webpack": "3.5.1",
-    "webpack-dashboard": "^1.0.2",
+    "webpack-dashboard": "^3.3.7",
     "webpack-dev-server": "2.7.1",
     "webpack-manifest-plugin": "1.2.1",
     "webpack-stats-plugin": "^0.2.1",
